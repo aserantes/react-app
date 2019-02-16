@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardImgOverlay, CardTitle, CardBody, CardText } from 'reactstrap';
+import { Card, CardImg, CardTitle, CardBody, CardText } from 'reactstrap';
 CardTitle.defaultProps.tag = 'h5';
 
 class Dishdetail extends Component {
@@ -15,14 +15,17 @@ class Dishdetail extends Component {
 
     render() {
         console.log('Dishdetail component render is invoked')
-        if (this.props.dish != null) {
+        if (this.props.dish != null) { //if no dish selected, return empty div
             const comments = this.props.dish.comments.map((txt) => {
-                console.log(txt);
-                return (
-                    <ul className="list-unstyled" key={txt.id}>
-                        <li>{txt.comment}</li>
-                        <li>-- {txt.author} , {txt.date}</li>
-                    </ul>)
+                if (txt != null) { //if no comments, return empty div
+                    return (
+                        <ul className="list-unstyled" key={txt.id}>
+                            <li>{txt.comment}</li>
+                            <li>-- {txt.author} , {txt.date}</li>
+                        </ul>)
+                } else {
+                    return (<div></div>)
+                }
             })
             return (
                 <div className="row">
