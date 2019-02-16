@@ -16,12 +16,14 @@ class Dishdetail extends Component {
     render() {
         console.log('Dishdetail component render is invoked')
         if (this.props.dish != null) { //if no dish selected, return empty div
+            const dateOptions = { year: 'numeric', month: 'short', day: '2-digit' };
             const comments = this.props.dish.comments.map((txt) => {
                 if (txt != null) { //if no comments, return empty div
+                    const formattedDate = (new Date(txt.date)).toLocaleDateString('en-US', dateOptions)
                     return (
                         <ul className="list-unstyled" key={txt.id}>
                             <li>{txt.comment}</li>
-                            <li>-- {txt.author} , {txt.date}</li>
+                            <li>-- {txt.author} , {formattedDate}</li>
                         </ul>)
                 } else {
                     return (<div></div>)
